@@ -11,6 +11,7 @@ OUTPUT_DIR="/tmp/lambda/"
 OUTPUT_FILE="/tmp/lambda.zip"
 
 echo "Copying source to temporary location"
+mkdir -p "${OUTPUT_DIR}"
 cp ~/* "${OUTPUT_DIR}"
 
 echo "Retrieving properties"
