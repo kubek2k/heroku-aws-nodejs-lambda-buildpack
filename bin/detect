@@ -1,1 +1,1 @@
-../heroku-buildpack-java/bin/detect
+../heroku-buildpack-nodejs/bin/detect
