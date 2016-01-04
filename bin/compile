@@ -7,7 +7,7 @@ CACHE_DIR="$2"
 ENV_DIR="$3"
 
 echo "Invoking java buildpack"
-${DIR}/../heroku-buildpack-java/bin/compile $1 $2 $3
+${DIR}/../heroku-buildpack-nodejs/bin/compile $1 $2 $3
 if [ $? -ne 0 ]; then
     exit 1
 fi
