@@ -18,7 +18,7 @@ echo "Retrieving properties"
 printenv | grep -v "^_.*" | sed -e 's/^\([^\=]*\)=\(.*\)$/\1=\2/' > "${OUTPUT_DIR}env.properties"
 
 echo "Zipping the lambda code"
-chmod -R a+r "${OUTPUT_DIR}"
+chmod -R a+rwx "${OUTPUT_DIR}"
 cd "${OUTPUT_DIR}"
 zip -rX "${OUTPUT_FILE}" *
 cd -
