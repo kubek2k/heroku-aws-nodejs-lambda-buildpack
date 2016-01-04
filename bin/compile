@@ -13,6 +13,7 @@ if [ $? -ne 0 ]; then
 fi
 
 BUILDPACK_DIR="${BUILD_DIR}/.heroku-aws-nodejs-lambda-buildpack"
+mkdir -p "${BUILDPACK_DIR}"
 
 echo "Installing python and AWS CLI"
 cp "${DIR}/../aws-cli-installer/requirements.txt" "${BUILD_DIR}/"
