@@ -19,7 +19,7 @@ printenv | grep -v "^_.*" | sed -e 's/^\([^\=]*\)=\(.*\)$/\1=\2/' > "${OUTPUT_DI
 
 echo "Zipping the lambda code"
 cd "${OUTPUT_DIR}"
-zip -r "${OUTPUT_FILE}" *
+zip -rX "${OUTPUT_FILE}" *
 cd -
 
 echo "Deploying lambda"
