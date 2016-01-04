@@ -1,0 +1,30 @@
+#!/bin/bash
+
+DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+
+BUILD_DIR="$1"
+CACHE_DIR="$2"
+ENV_DIR="$3"
+
+echo "Invoking java buildpack"
+${DIR}/../heroku-buildpack-java/bin/compile $1 $2 $3
+if [ $? -ne 0 ]; then
+    exit 1
+fi
+
+BUILDPACK_DIR="${BUILD_DIR}/.heroku-aws-nodejs-lambda-buildpack"
+
+echo "Installing python and AWS CLI"
+cp "${DIR}/../aws-cli-installer/requirements.txt" "${BUILD_DIR}/"
+cp "${DIR}/../aws-cli-installer/setup.py" "${BUILD_DIR}/"
+${DIR}/../aws-cli-installer/heroku-buildpack-python/bin/compile $1 $2 $3
+if [ $? -ne 0 ]; then
+    exit 1
+fi
+rm "${BUILD_DIR}/requirements.txt" "${BUILD_DIR}/setup.py"
+
+echo "Installing deploy script" 
+cp "${DIR}/../deploy-lambda.sh" "${BUILDPACK_DIR}/"
+
+echo "Installing deployer to Procfile"
+echo "deploy: .heroku-aws-nodejs-lambda-buildpack/deploy-lambda.sh" >> "${BUILD_DIR}/Procfile"
